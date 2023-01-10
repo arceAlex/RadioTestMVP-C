@@ -1,0 +1,32 @@
+PODS:
+  - OHHTTPStubs/Core (9.1.0)
+  - OHHTTPStubs/Default (9.1.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (9.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (9.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (9.1.0)
+  - OHHTTPStubs/Swift (9.1.0):
+    - OHHTTPStubs/Default
+  - SideMenu (6.5.0)
+
+DEPENDENCIES:
+  - OHHTTPStubs/Swift
+  - SideMenu (~> 6.0)
+
+SPEC REPOS:
+  trunk:
+    - OHHTTPStubs
+    - SideMenu
+
+SPEC CHECKSUMS:
+  OHHTTPStubs: 90eac6d8f2c18317baeca36698523dc67c513831
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+
+PODFILE CHECKSUM: 97916bb0db5f64c190b76c8b32dd2770a8aca810
+
+COCOAPODS: 1.11.3
