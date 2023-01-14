@@ -18,6 +18,7 @@ protocol RadioPresenterDelegate {
     func restartPlayer()
     func showStatusValuesInScreen(playerItem: AVPlayerItem, player: AVPlayer)
     func setReproductionFailed()
+    func sendAlerts(message: String, buttonTitle: String)
 }
 
 class RadioPresenter {
@@ -32,6 +33,7 @@ class RadioPresenter {
     var defaults = UserDefaults.standard
     var cellIdSelected : Int?
     var coordinator : AppCoordinator?
+    var jsonError : JsonError?
     
     func getStations() {
         RadioApi.fetchRadioJson { result in
@@ -46,6 +48,27 @@ class RadioPresenter {
             case .failure(let error):
                 print("error")
                 print(error)
+                DispatchQueue.main.async {
+                    switch error {
+                        
+                    case .missingData:
+                        self.jsonError = .missingData
+                        print("Sin datos disponibles. Inténtelo de nuevo más tarde")
+                        self.delegate?.sendAlerts(message: "Sin datos disponibles. Inténtelo de nuevo más tarde", buttonTitle: "Reintentar")
+                    case .codeError:
+                        self.jsonError = .codeError
+                        print("Servidor ocupado. Inténtelo de nuevo más tarde")
+                        self.delegate?.sendAlerts(message: "Servidor ocupado. Inténtelo de nuevo más tarde", buttonTitle: "Reintentar")
+                    case .timeOut:
+                        self.jsonError = .timeOut
+                        print("Servidor tarda en responder. Compruebe su conexión e inténtelo de nuevo más tarde")
+                        self.delegate?.sendAlerts(message: "Servidor tarda en responder. Compruebe su conexión e inténtelo de nuevo más tarde", buttonTitle: "Reintentar")
+                        
+                    case .defaultError:
+                        print("Ha ocurrido un error. Inténtelo de nuevo más tarde")
+                    }
+                    
+                }
             }
         }
     }
@@ -65,7 +88,7 @@ class RadioPresenter {
         case "itemStatus": print("ItemStatus")
             delegate?.showStatusValuesInScreen(playerItem: myPlayerItem!, player: myPlayer)
             switch myPlayerItem?.status {
-            case .failed: 
+            case .failed:
                 delegate?.setReproductionFailed()
             case .readyToPlay: print("Ready To Play")
             case .unknown: print("Not Ready")

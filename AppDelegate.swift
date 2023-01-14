@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import OHHTTPStubs
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,10 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let topPadding = window!.safeAreaInsets.top
         //let bottomPadding = window!.safeAreaInsets.bottom
         print(bottomSafeArea)
-        let stubPath = OHPathForFile("paso.json", type(of: self))
-        stub(condition: isHost("api.jsonbin.io")) { _ in
-            return fixture(filePath: stubPath!, headers: ["content_type": "application/json"])
-        }
+
         return true
     }
 }

@@ -8,27 +8,53 @@
 import Foundation
 import UIKit
 
+enum JsonError : Error {
+    case missingData
+    case codeError
+    case timeOut
+    case defaultError
+}
 class RadioApi {
     enum jsonError : Error {
         case missingData
     }
-    static func fetchRadioJson (completion: @escaping(Result<[RadioModel],Error>)->Void) {
+    static func fetchRadioJson (completion: @escaping(Result<[RadioModel],JsonError>)->Void) {
         let url = URL(string: "https://api.jsonbin.io/v3/b/63721dbc2b3499323bff5d1e")!
+        var compleitionSucces = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
+            if compleitionSucces == false {
+                completion(.failure(.timeOut))
+                return
+            }
+        }
+        )
         URLSession.shared.dataTask(with: url) {(data, response, error) in
-            if let error = error {
-                completion(.failure(error))
+            let response = response as? HTTPURLResponse
+            
+            if response!.statusCode != 200 && response!.statusCode != 408 {
+                print("Error \(response!.statusCode)")
+                completion(.failure(.codeError))
+                return
+            }
+            if response!.statusCode == 408 {
+                completion(.failure(.timeOut))
+                return
+            }
+            if let _ = error {
+                completion(.failure(.defaultError))
                 return
             }
             guard let data = data else {
-                completion(.failure(jsonError.missingData))
+                completion(.failure(.missingData))
                 return
             }
             do {
                 let json = try JSONDecoder().decode(Record.self, from: data)
                 completion(.success(json.record.radioModels))
+                compleitionSucces = true
                 return
             } catch let error {
-                completion(.failure(error))
+                completion(.failure(.defaultError))
                 print(error.localizedDescription)
                 return
             }
@@ -47,11 +73,3 @@ class RadioApi {
         }.resume()
     }
 }
-
-//let radioJson = [
-//    RadioModel(station: "Los 40", url: "https://25633.live.streamtheworld.com/LOS40_SC", image:"Los40"),
-//    RadioModel(station: "Hit FM", url: "https://bbhitfm.kissfmradio.cires21.com/bbhitfm.mp3?wmsAuthSign=c2VydmVyX3RpbWU9MTEvMDIvMjAyMiAxMDoyNTowNyBQTSZoYXNoX3ZhbHVlPU56dXZobW9XS1ZPVFp5dnJkMERsK2c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD00NDA3MTQxMw==", image: "HitFM")
-//]
-
-//hitFmForbidden: https://bbhitfm.kissfmradio.cires21.com/bbhitfm.mp3?wmsAuthSign=c2VydmVyX3RpbWU9MTEvMDIvMjAyMiAxMDoyNTowNyBQTSZoYXNoX3ZhbHVlPU56dXZobW9XS1ZPVFp5dnJkMERsK2c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD00NDA3MTQxMw==
-//hitFmOk: https://bbhitfm.kissfmradio.cires21.com/bbhitfm.mp3?wmsAuthSign=c2VydmVyX3RpbWU9MTEvMDQvMjAyMiAwNTowODoyMCBQTSZoYXNoX3ZhbHVlPWRqWWJ6QXQzbDdMcUZucFN1ellvY3c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD00NDczMzY3NQ==

@@ -67,7 +67,7 @@ class RadioViewController: UIViewController {
 //        coloredAppearance.backgroundColor = backGroundColor
 //        coloredAppearance.titleTextAttributes = [.foregroundColor: tintNormalColor]
 //        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: tintNormalColor]
-//               
+//
 //        UINavigationBar.appearance().standardAppearance = coloredAppearance
 //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
@@ -208,14 +208,14 @@ class RadioViewController: UIViewController {
         radioView.playButton.setImage(UIImage(systemName: "play.circle", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 70))), for: .normal)
         radioView.playButton.isSelected = false
         
-    } 
+    }
     @objc func touchPlayerButton() {
         radioPresenter.changePlayerState(buttonIsSelected: radioView.playButton.isSelected)
     }
 }
 extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myStations.count  
+        return myStations.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RadioTableViewCell", for: indexPath) as! RadioTableViewCell
@@ -336,6 +336,13 @@ extension RadioViewController : RadioPresenterDelegate {
     func restartPlayer() {
         playingFailed = false
         stationPaused = nil
+    }
+    func sendAlerts(message: String, buttonTitle: String) {
+        let alert = UIAlertController(title: "Alerta", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.default, handler: {_ in
+            self.radioPresenter.getStations()
+            print("Reintentando")}))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

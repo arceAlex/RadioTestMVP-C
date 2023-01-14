@@ -14,31 +14,59 @@ class RadioTestTests: XCTestCase {
     // sut -> System Under Test
     var sutRadioPresenter : RadioPresenter = RadioPresenter()
     var sutDelegate : RadioVCMock = RadioVCMock()
-    
-    
-    func test_GetStations() {
+    var jsonStub: HTTPStubsDescriptor?
+
+    func test_GetStationsAllOk() {
+        let stubPath = OHPathForFile("stubJson.json", type(of: self))!
+        jsonStub = stub(condition: isHost("api.jsonbin.io")) { _ in
+            return HTTPStubsResponse(fileAtPath: stubPath, statusCode: 200, headers: nil)
+        }
         sutRadioPresenter.delegate = sutDelegate
         sutDelegate.expGetSendStations = expectation(description: "get stations")
         sutRadioPresenter.getStations()
         waitForExpectations(timeout: 10.0)
-        XCTAssertTrue(sutRadioPresenter.radioJson!.count > 10)
+        XCTAssertTrue(sutRadioPresenter.radioJson!.count == 7)
+    }
+    func test_GetStationsCodeError() {
+        let stubPath = OHPathForFile("stubJson.json", type(of: self))!
+        jsonStub = stub(condition: isHost("api.jsonbin.io")) { _ in
+            return HTTPStubsResponse(fileAtPath: stubPath, statusCode: 1000, headers: nil)
+        }
+        sutRadioPresenter.delegate = sutDelegate
+        sutDelegate.expGetSendAlerts = expectation(description: "Code Error")
+        sutRadioPresenter.getStations()
+        waitForExpectations(timeout: 10.0)
+        XCTAssertTrue(sutRadioPresenter.jsonError == .codeError)
+    }
+    func test_GetStationsTimeout() {
+        let stubPath = OHPathForFile("stubJson.json", type(of: self))!
+        jsonStub = stub(condition: isHost("api.jsonbin.io")) { _ in
+            return HTTPStubsResponse(fileAtPath: stubPath, statusCode: 200, headers: nil)
+                .requestTime(0, responseTime: 25)
+        }
+        sutRadioPresenter.delegate = sutDelegate
+        sutDelegate.expGetSendAlerts = expectation(description: "Timeout")
+        sutRadioPresenter.getStations()
+        waitForExpectations(timeout: 30.0)
+        XCTAssertTrue(sutRadioPresenter.jsonError == .timeOut)
+    }
+    func removeStub() {
+        if let jsonStub = jsonStub {
+            HTTPStubs.removeStub(jsonStub)
+        }
     }
     
-    func testGetData() {
-        stub(condition: isHost("mywebservice.com")) { _ in
-          let obj = ["key1":"value1", "key2":["value2A","value2B"]]
-           return  HTTPStubsResponse(jsonObject: obj, statusCode: 100, headers: nil)
-         // return OHHTTPStubsResponse(JSONObject: obj, statusCode: 200, headers: nil)
-        }
 
+    
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        removeStub()
     }
-//    override func setUpWithError() throws {
-//        // Put setup code here. This method is called before the invocation of each test method in the class.
-//    }
-//
-//    override func tearDownWithError() throws {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sutDelegate.expGetSendAlerts = nil
+    }
 //
 //    func testExample() throws {
 //        // This is an example of a functional test case.
@@ -58,13 +86,15 @@ class RadioTestTests: XCTestCase {
 }
 
 class RadioVCMock : RadioPresenterDelegate {
-    var sendStationsWasCalled : Bool = false
     var expGetSendStations : XCTestExpectation?
+    var expGetSendAlerts : XCTestExpectation?
+    
+    func sendAlerts(message: String, buttonTitle: String) {
+        expGetSendAlerts?.fulfill()
+    }
     
     func sendStations(stations: [RadioModel]) {
-        sendStationsWasCalled = true
         expGetSendStations?.fulfill()
-        
     }
     
     func reproductorLoading() {
