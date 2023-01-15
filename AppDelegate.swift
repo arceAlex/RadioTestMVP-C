@@ -19,13 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let bottomSafeArea = window!.safeAreaInsets.bottom
         appCoordinator = AppCoordinator(navigationController: navigationController,bottomSafeArea: bottomSafeArea)
         appCoordinator.start()
-//        window = UIWindow()
-       // window?.rootViewController = UINavigationController(rootViewController: RadioViewController())
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
-        //let topPadding = window!.safeAreaInsets.top
-        //let bottomPadding = window!.safeAreaInsets.bottom
         print(bottomSafeArea)
 
         return true
