@@ -17,12 +17,9 @@ class AppCoordinator {
     let menuPresenter = MenuPresenter()
     var menu : SideMenuNavigationController?
     var favoritesIdList : [Int]?
-    var bottomSafeArea : CGFloat?
     
     
-    init(navigationController : UINavigationController, bottomSafeArea : CGFloat) {
-        self.bottomSafeArea = bottomSafeArea
-        radioVC.bottomSafeArea = bottomSafeArea
+    init(navigationController : UINavigationController) {
         self.navigationController = navigationController
         radioVC.radioPresenter = radioPresenter
         menuVC.menuPresenter = menuPresenter
@@ -30,8 +27,6 @@ class AppCoordinator {
         menuVC.menuPresenter.coordinator = self
         radioPresenter.delegate = radioVC
         menuPresenter.delegate = menuVC
-//        favoritesIdList = radioPresenter.favoritesIdList
-        //menuPresenter.favoritesIdList = radioPresenter.favoritesIdList
         
         self.navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 15)]
         self.navigationController.navigationBar.barTintColor = .black
@@ -50,7 +45,6 @@ class AppCoordinator {
     }
     func goToRadioVC() {
         favoritesIdList = radioPresenter.favoritesIdList
-        //radioVC.radioView = RadioView(bottomSafeArea: bottomSafeArea!)
         navigationController.pushViewController(radioVC, animated: true)
     }
     func goToRadioVCFiltered(stations : [RadioModel]) {
@@ -59,7 +53,6 @@ class AppCoordinator {
         menuVC.dismiss(animated: true)
     }
     func goToMenuVC() {
-//        menuPresenter.allStations = radioPresenter.radioJson
         menuPresenter.favoritesIdList = radioPresenter.favoritesIdList
         print("Llegué")
         radioVC.present(menu!, animated: true)

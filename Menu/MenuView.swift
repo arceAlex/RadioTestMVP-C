@@ -10,15 +10,12 @@ import UIKit
 
 class MenuView : UIView {
     lazy var todasButton : UIButton = {
-//        let todasButton = UIButton(frame: CGRect(x: 20, y: 50, width: UIScreen.main.bounds.width, height: 50))
         let todasButton = UIButton()
         todasButton.setTitle("Todas", for: .normal)
         todasButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         todasButton.contentHorizontalAlignment = .left
-        //todasButton.setTitleColor(UIColor(red: 0.5686, green: 0.6745, blue: 1, alpha: 1.0), for: .normal)
         todasButton.setTitleColor(UIColor.green, for: .normal)
         todasButton.setTitleColor(UIColor.white, for: .highlighted)
-        //todasButton.backgroundColor = .white
         return todasButton
     }()
     var separationLine1 : UIView = {
@@ -57,7 +54,6 @@ class MenuView : UIView {
         return generosButton
     }()
     lazy var tableView : UITableView = {
-//        let tableView = UITableView(frame: CGRect(x: 30, y: 200, width: UIScreen.main.bounds.width-20, height: 400))
         let tableView = UITableView()
         tableView.backgroundColor = .darkGray
         tableView.allowsSelection = false

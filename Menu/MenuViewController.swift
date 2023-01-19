@@ -16,8 +16,6 @@ class MenuViewController : UIViewController {
     var tintColor : UIColor = .darkGray
     override func viewDidLoad() {
         super.viewDidLoad()
-        //menuPresenter.menuVC = self
-        //view.backgroundColor = UIColor(red: 0.3843, green: 0.4235, blue: 0.549, alpha: 1.0)
         view.backgroundColor = tintColor
         menuView.tableView.dataSource = self
         menuView.tableView.delegate = self
@@ -27,16 +25,12 @@ class MenuViewController : UIViewController {
         menuView.todasButton.addTarget(self, action: #selector(tapTodasButton), for: .touchUpInside)
         menuView.favoritasButton.addTarget(self, action: #selector(tapFavoritasButton), for: .touchUpInside)
         
-        //self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.3843, green: 0.4235, blue: 0.549, alpha: 1.0)
-        
                 
         self.navigationController?.navigationBar.barTintColor = tintColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.extendedLayoutIncludesOpaqueBars = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        //Remove tableView empty cells
-        //menuView.tableView.tableFooterView = UIView()
         genresArray = menuPresenter.getGenresArray()
         view.addSubview(menuView)
         getSafeArea()
@@ -51,9 +45,7 @@ class MenuViewController : UIViewController {
             menuView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        menuPresenter.getGenresArray()
-//    }
+    
     @objc func tapTodasButton() {
         menuPresenter.showAllStations()
     }
@@ -68,7 +60,6 @@ extension MenuViewController : UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
-        //cell.backgroundColor = .black
         cell.backgroundColor = tintColor
         cell.configureLabel(label: genresArray![indexPath.row])
         cell.delegate = self

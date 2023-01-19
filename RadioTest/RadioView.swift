@@ -12,7 +12,6 @@ class RadioView : UIView {
     
     var stationsTableView : UITableView = {
         let stationsTableView = UITableView()
-//        stationsTableView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 80)
         stationsTableView.allowsSelection = false
         stationsTableView.backgroundColor = .black
         stationsTableView.separatorStyle = .none
@@ -20,12 +19,7 @@ class RadioView : UIView {
         return stationsTableView
     }()
     var rectanglePlayer : UIView = {
-//        let rectanglePlayer = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - 80, width: UIScreen.main.bounds.width, height: 80))
-//        let rectanglePlayer = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - 80, width: UIScreen.main.bounds.width, height: 80))
         let rectanglePlayer = UIView()
-        //rectanglePlayer.backgroundColor = .blue
-        //rectanglePlayer.backgroundColor = UIColor(hue: 0.6833, saturation: 1, brightness: 0.45, alpha: 1.0)
-        
         return rectanglePlayer
     }()
     var separationLine : UIView = {
@@ -61,7 +55,6 @@ class RadioView : UIView {
     }()
     var statusChangeLabel : UILabel = {
         let statusChangeLabel = UILabel(frame: CGRect(x: 0, y: 60, width: UIScreen.main.bounds.width, height: 20))
-       // statusChangeLabel.backgroundColor = .black
         statusChangeLabel.font = statusChangeLabel.font.withSize(12)
         statusChangeLabel.text = "Hola"
         statusChangeLabel.textColor = .white
@@ -75,9 +68,6 @@ class RadioView : UIView {
     
     init() {
         super.init(frame: UIScreen.main.bounds)
-        
-        //super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 300))
-        //clipsToBounds = true
         config()
     }
     

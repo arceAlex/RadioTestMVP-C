@@ -149,7 +149,6 @@ class RadioPresenter {
         }
     }
     func startReproduction() {
-        //radioVC?.stationPaused = nil
         let url = URL(string: (myStation?.url)!)
         myPlayerItem = AVPlayerItem(url: url!)
         myPlayer = AVPlayer(playerItem: myPlayerItem)
@@ -160,9 +159,7 @@ class RadioPresenter {
             print("Fallo Audio Session")
         }
         delegate?.createObserver()
-//        radioVC?.createObserver(playerItem: myPlayerItem!)
         myPlayer.play()
-        //radioVC?.radioView.stationsTableView.reloadData()
     }
     func manageFavourites(cell : RadioTableViewCell) {
         cell.favouriteSelected?.toggle()
@@ -186,10 +183,6 @@ class RadioPresenter {
             delegate?.setPlay()
         }
     }
-
-//    func reproductorLoading() {
-//        delegate?.reproductorLoading()
-//    }
 }
 
 

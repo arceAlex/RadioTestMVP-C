@@ -24,8 +24,6 @@ class RadioTableViewCell : UITableViewCell {
         let favouriteButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 50, y: 5, width: 35, height: 35))
         favouriteButton.setImage(UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 15))), for: .normal)
         favouriteButton.setImage(UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 19))), for: .selected)
-        //favouriteButton.tintColor = tint
-        //favouriteButton.backgroundColor = .yellow
         favouriteButton.addTarget(self, action: #selector(tapFavouriteButton), for: .touchUpInside)
         return favouriteButton
     }()
@@ -33,7 +31,6 @@ class RadioTableViewCell : UITableViewCell {
         let label = UILabel(frame: CGRect(x: 80, y: 7.5, width: UIScreen.main.bounds.width - 125, height: 30))
         label.textColor = tint
         label.font = label.font.withSize(15)
-        //label.backgroundColor = .yellow
         return label
     }()
     lazy var stationImage : UIImageView = {
@@ -42,12 +39,10 @@ class RadioTableViewCell : UITableViewCell {
     }()
     lazy var gifSpeaker : UIImageView = {
         let gifSpeaker = UIImageView(frame: CGRect(x: UIScreen.main.bounds.width - 70, y: 12.5, width: 20, height: 20))
-        //gifSpeaker.image = UIImage.gifImageWithName("SpeakerGif")
         return gifSpeaker
     }()
     lazy var playButton : UIButton = {
         let playButton = UIButton(frame: CGRect(x: 0, y: 5, width: UIScreen.main.bounds.width - 80, height: 35))
-        //playButton.backgroundColor = .yellow
         playButton.addTarget(self, action: #selector(touchPlayButton), for: .touchUpInside)
         return playButton
     }()
@@ -70,8 +65,6 @@ class RadioTableViewCell : UITableViewCell {
         delegate?.tapFavouriteButton(cell: self)
     }
     func configureOnlyLabel (radio: RadioModel) {
-//        titleButton.setTitle(radio.station, for: .normal)
-//        titleButton.titleLabel?.font = .systemFont(ofSize: 25)
         stationLabel.text = radio.station
     }
 }

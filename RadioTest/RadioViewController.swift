@@ -24,15 +24,12 @@ class RadioViewController: UIViewController {
     let backGroundColor : UIColor = .black
     let tintNormalColor : UIColor = .white
     let tintSelectColor : UIColor = .green
-    var bottomSafeArea : CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = backGroundColor
-        
-        //getSafeArea()
-        
+  
         radioView.stationsTableView.dataSource = self
         radioView.stationsTableView.delegate = self
         
@@ -45,31 +42,11 @@ class RadioViewController: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = true
         
         self.title = "Emisoras en directo"
-        //self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        
-        
-        
-//        radioView.menuButtonItem.target = self
-//        radioView.menuButtonItem.action = #selector(tapMenuButton)
-//        navigationItem.rightBarButtonItem = radioView.menuButtonItem
-        
-        //Remove stationsTableView empty cells
-        //radioView.stationsTableView.tableFooterView = UIView()
         
         view.addSubview(radioView)
         getSafeArea()
         radioView.playerStationLabel.text = "Seleccione emisora"
         radioView.playerStationLabel.textColor = tintNormalColor
-        
-//        let coloredAppearance = UINavigationBarAppearance()
-//        coloredAppearance.configureWithOpaqueBackground()
-//        coloredAppearance.backgroundColor = backGroundColor
-//        coloredAppearance.titleTextAttributes = [.foregroundColor: tintNormalColor]
-//        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: tintNormalColor]
-//
-//        UINavigationBar.appearance().standardAppearance = coloredAppearance
-//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         
         playButtonOff()
         view.addSubview(loadingScreen)
@@ -116,7 +93,8 @@ class RadioViewController: UIViewController {
         // Define Now Playing Info
         var nowPlayingInfo = [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = radioPresenter.myStation?.station
-
+        
+        //Define image info
 //        if let image = myStationSoundingImage {
 //            nowPlayingInfo[MPMediaItemPropertyArtwork] =
 //                MPMediaItemArtwork(boundsSize: image.size) { size in
@@ -129,18 +107,13 @@ class RadioViewController: UIViewController {
 //                    return image.imageWith(newSize: size)
 //            }
 //        }
-        
-        
-//        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = radioPresenter.myPlayerItem?.currentTime().seconds
-//        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = radioPresenter.myPlayerItem?.asset.duration.seconds
-//        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = radioPresenter.myPlayer.rate
+
 
         // Set the metadata
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
     func createObserver(playerItem: AVPlayerItem, player: AVPlayer){
-        //playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: &playerContext)
         playerItem.addObserver(self, forKeyPath: "itemStatus", options: [.old, .new], context: &playerContext)
         player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: &playerContext)
         player.addObserver(self, forKeyPath: "rate", options: [.old, .new], context: &playerContext)
@@ -255,12 +228,10 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         else {
-            //cell.stationLabel.frame = CGRect(x: 65, y: 7.5, width: UIScreen.main.bounds.width - 125, height: 30)
             cell.gifSpeaker.image = nil
             cell.stationLabel.textColor = tintNormalColor
         }
         if stationPaused == cell.id  {
-            //cell.stationLabel.frame = CGRect(x: 65, y: 7.5, width: UIScreen.main.bounds.width - 170, height: 30)
             cell.gifSpeaker.image = UIImage(named: "Speaker")
         }
         cell.delegate = self
