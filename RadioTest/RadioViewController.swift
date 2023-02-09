@@ -95,6 +95,14 @@ class RadioViewController: UIViewController {
         nowPlayingInfo[MPMediaItemPropertyTitle] = radioPresenter.myStation?.station
         
         //Define image info
+        if let image = myStationSoundingImage {
+            let artwork = MPMediaItemArtwork(boundsSize: image.size, requestHandler: {(_) -> UIImage in
+                return image
+            })
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+        }
+        
+        
 //        if let image = myStationSoundingImage {
 //            nowPlayingInfo[MPMediaItemPropertyArtwork] =
 //                MPMediaItemArtwork(boundsSize: image.size) { size in

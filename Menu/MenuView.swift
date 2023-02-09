@@ -12,7 +12,7 @@ class MenuView : UIView {
     lazy var todasButton : UIButton = {
         let todasButton = UIButton()
         todasButton.setTitle("Todas", for: .normal)
-        todasButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        todasButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         todasButton.contentHorizontalAlignment = .left
         todasButton.setTitleColor(UIColor.green, for: .normal)
         todasButton.setTitleColor(UIColor.white, for: .highlighted)
@@ -36,7 +36,7 @@ class MenuView : UIView {
     lazy var favoritasButton : UIButton = {
         let favoritasButton = UIButton(frame: CGRect(x: 20, y: 100, width: UIScreen.main.bounds.width, height: 50))
         favoritasButton.setTitle("Favoritas", for: .normal)
-        favoritasButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        favoritasButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         favoritasButton.contentHorizontalAlignment = .left
         favoritasButton.setTitleColor(UIColor.green, for: .normal)
         favoritasButton.setTitleColor(UIColor.white, for: .highlighted)
@@ -46,7 +46,7 @@ class MenuView : UIView {
         let generosButton = UIButton(frame: CGRect(x: 20, y: 150, width: UIScreen.main.bounds.width, height: 50))
         generosButton.setTitle("Géneros  ▲", for: .selected)
         generosButton.setTitle("Géneros  ▼", for: .normal)
-        generosButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        generosButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         generosButton.addTarget(self, action: #selector(showGenrestableView), for: .touchUpInside)
         generosButton.contentHorizontalAlignment = .left
         generosButton.setTitleColor(UIColor.green, for: .normal)

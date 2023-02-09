@@ -20,6 +20,7 @@ class MenuPresenter {
     
     func showAllStations() {
         coordinator?.goToRadioVCFiltered(stations: allStations!)
+        coordinator?.radioVC.title = "Emisoras en directo"
     }
     func showFavoritesStations() {
         favoritesIdList = coordinator?.favoritesIdList
@@ -37,6 +38,7 @@ class MenuPresenter {
             }
         }
         coordinator?.goToRadioVCFiltered(stations: myStations!)
+        coordinator?.radioVC.title = "Favoritas"
     }
     
     func filterStations(cell: MenuTableViewCell) {
@@ -50,6 +52,7 @@ class MenuPresenter {
     func filterGenres(genre : String){
         let jsonFiltered = allStations!.filter{$0.genre == genre}
         coordinator?.goToRadioVCFiltered(stations: jsonFiltered)
+        coordinator?.radioVC.title = genre
     }
     func getGenresArray() -> [String] {
         for station in allStations! {

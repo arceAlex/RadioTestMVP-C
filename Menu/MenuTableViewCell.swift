@@ -19,6 +19,7 @@ class MenuTableViewCell : UITableViewCell {
         let genreButton = UIButton(frame: CGRect(x: 20, y: 10, width: 100, height: 30))
         genreButton.setTitleColor(UIColor.green, for: .normal)
         genreButton.contentHorizontalAlignment = .left
+        genreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         genreButton.setTitleColor(UIColor.white, for: .highlighted)
         genreButton.addTarget(self, action: #selector(tapGenreCell), for: .touchUpInside)
         return genreButton
