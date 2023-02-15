@@ -48,6 +48,7 @@ class RadioViewController: UIViewController {
         radioView.playerStationLabel.text = "Seleccione emisora"
         radioView.playerStationLabel.textColor = tintNormalColor
         
+        audioGifOff()
         playButtonOff()
         view.addSubview(loadingScreen)
         radioPresenter.getStations()
@@ -176,7 +177,8 @@ class RadioViewController: UIViewController {
         radioView.gifAudio.image = nil
     }
     func audioGifLoading() {
-        radioView.gifAudio.image = UIImage.gifImageWithName("LoadingGif")
+//        radioView.gifAudio.image = UIImage.gifImageWithName("LoadingGif")
+        radioView.gifAudio.image = UIImage.gifImageWithName("AudioGif")
     }
     func playButtonOff() {
         radioView.playButton.setImage(nil, for: .normal)
@@ -201,6 +203,9 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RadioTableViewCell", for: indexPath) as! RadioTableViewCell
         cell.backgroundColor = backGroundColor
+        //Borrar test vc
+        cell.radioVCTest = self
+        
         let myStation = self.myStations[indexPath.row]
         var myCurrentImage = UIImage()
         cell.id = myStation.id
@@ -260,14 +265,90 @@ extension RadioViewController : RadioTableViewDelegate {
         self.radioView.stationsTableView.reloadData()
     }
     
+//    func touchPlayButton(cell: RadioTableViewCell) {
+//        stationSelected = cell.station
+//        radioPresenter.touchCellPlayButton(station: cell.station!)
+//        radioPresenter.cellIdSelected = cell.id
+//    }
     func touchPlayButton(cell: RadioTableViewCell) {
-        stationSelected = cell.station
-        radioPresenter.touchCellPlayButton(station: cell.station!)
-        radioPresenter.cellIdSelected = cell.id
+        let alert2 = UIAlertController(title: "Alerta", message: "station selected", preferredStyle: UIAlertController.Style.alert)
+        alert2.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+            self.stationSelected = cell.station
+            
+            let alert3 = UIAlertController(title: "Alerta", message: "touchcellplaybutton", preferredStyle: UIAlertController.Style.alert)
+            alert3.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                self.radioPresenter.touchCellPlayButton(station: cell.station!)
+                
+                let alert4 = UIAlertController(title: "Alerta", message: "cell id", preferredStyle: UIAlertController.Style.alert)
+                alert4.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                    self.radioPresenter.cellIdSelected = cell.id
+                }))
+                self.present(alert4, animated: true, completion: nil)
+            }))
+            self.present(alert3, animated: true, completion: nil)
+        }))
+        self.present(alert2, animated: true, completion: nil)
     }
 }
 
 extension RadioViewController : RadioPresenterDelegate {
+
+    func startSecondAlerts(station: RadioModel) {
+        let alert2 = UIAlertController(title: "Alerta", message: "RepLoading & restarr player", preferredStyle: UIAlertController.Style.alert)
+        alert2.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+            self.reproductorLoading()
+            self.restartPlayer()
+            
+            let alert3 = UIAlertController(title: "Alerta", message: "Mystation save", preferredStyle: UIAlertController.Style.alert)
+            alert3.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                self.radioPresenter.myStation = station
+                
+                let alert4 = UIAlertController(title: "Alerta", message: "Start Reprod", preferredStyle: UIAlertController.Style.alert)
+                alert4.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                    self.radioPresenter.startReproduction()
+                }))
+                self.present(alert4, animated: true, completion: nil)
+            }))
+            self.present(alert3, animated: true, completion: nil)
+        }))
+        self.present(alert2, animated: true, completion: nil)
+    }
+    
+    func startAlertsTest() {
+        let alert = UIAlertController(title: "Alerta", message: "AddUrl", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: {_ in
+            let url = URL(string: (self.radioPresenter.myStation?.url)!)
+            
+            let alert2 = UIAlertController(title: "Alerta", message: "Create PlayerItem & Player", preferredStyle: UIAlertController.Style.alert)
+            alert2.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                self.radioPresenter.myPlayerItem = AVPlayerItem(url: url!)
+                self.radioPresenter.myPlayer = AVPlayer(playerItem: self.radioPresenter.myPlayerItem)
+                
+                let alert3 = UIAlertController(title: "Alerta", message: "Start Audio Session", preferredStyle: UIAlertController.Style.alert)
+                alert3.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                    let audioSession = AVAudioSession.sharedInstance()
+                            do {
+                                 try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+                            } catch {
+                                print("Fallo Audio Session")
+                            }
+                    let alert4 = UIAlertController(title: "Alerta", message: "Create Observer & Play", preferredStyle: UIAlertController.Style.alert)
+                    alert4.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: { _ in
+                        self.createObserver()
+                        self.radioPresenter.myPlayer.play()
+                    }))
+                    self.present(alert4, animated: true, completion: nil)
+                }))
+                self.present(alert3, animated: true, completion: nil)
+            }))
+            self.present(alert2, animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
+                                      
+    
     func sendStations(stations: [RadioModel]) {
         myStations = stations
         radioView.stationsTableView.reloadData()

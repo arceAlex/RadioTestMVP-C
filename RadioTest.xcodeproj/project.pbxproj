@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0CF3589892A86A694C1D1BB3 /* Pods_RadioTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89117A917DA00EB866D3B0C /* Pods_RadioTest.framework */; };
-		AC2C441C2972E62B002A5D71 /* stubJson.json in Resources */ = {isa = PBXBuildFile; fileRef = AC2C441B2972E62B002A5D71 /* stubJson.json */; };
-		AC2C441E2972E649002A5D71 /* SpeakerGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = AC2C441D2972E649002A5D71 /* SpeakerGif.gif */; };
-		AC2C44202972E65E002A5D71 /* LoadingScreenGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = AC2C441F2972E65E002A5D71 /* LoadingScreenGif.gif */; };
-		AC2C44222972E666002A5D71 /* LoadingGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = AC2C44212972E666002A5D71 /* LoadingGif.gif */; };
 		AC35D9E42945E1260029F82C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC35D9E32945E1260029F82C /* LoadingView.swift */; };
 		AC35D9E8294614B20029F82C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC35D9E7294614B20029F82C /* AppCoordinator.swift */; };
 		AC8C6C9A2951C362000B94F4 /* UIImage extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C6C992951C362000B94F4 /* UIImage extension.swift */; };
@@ -31,6 +27,10 @@
 		ACB40431292E4B51006E3430 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB40430292E4B51006E3430 /* MenuPresenter.swift */; };
 		ACC37226292649490036B9A7 /* AudioGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = ACC37225292649490036B9A7 /* AudioGif.gif */; };
 		ACC3722829264BBF0036B9A7 /* ManageGifs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC3722729264BBF0036B9A7 /* ManageGifs.swift */; };
+		ACEDD6B3299D035B007496D7 /* SpeakerGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = ACEDD6B2299D035A007496D7 /* SpeakerGif.gif */; };
+		ACEDD6B5299D0369007496D7 /* LoadingScreenGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = ACEDD6B4299D0369007496D7 /* LoadingScreenGif.gif */; };
+		ACEDD6B7299D0374007496D7 /* LoadingGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = ACEDD6B6299D0373007496D7 /* LoadingGif.gif */; };
+		ACEDD6B9299D03A0007496D7 /* stubJson.json in Resources */ = {isa = PBXBuildFile; fileRef = ACEDD6B8299D03A0007496D7 /* stubJson.json */; };
 		E6438EE5FC77817805A95DF3 /* Pods_RadioTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF9940301970CAD15016701 /* Pods_RadioTestTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +49,6 @@
 		52F0ED13C8C0C788D3D2DA3A /* Pods-RadioTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadioTestTests.release.xcconfig"; path = "Target Support Files/Pods-RadioTestTests/Pods-RadioTestTests.release.xcconfig"; sourceTree = "<group>"; };
 		6AF9940301970CAD15016701 /* Pods_RadioTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadioTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A89117A917DA00EB866D3B0C /* Pods_RadioTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadioTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC2C441B2972E62B002A5D71 /* stubJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = stubJson.json; path = ../../stubJson.json; sourceTree = "<group>"; };
-		AC2C441D2972E649002A5D71 /* SpeakerGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = SpeakerGif.gif; path = ../../../SpeakerGif.gif; sourceTree = "<group>"; };
-		AC2C441F2972E65E002A5D71 /* LoadingScreenGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LoadingScreenGif.gif; path = ../../../LoadingScreenGif.gif; sourceTree = "<group>"; };
-		AC2C44212972E666002A5D71 /* LoadingGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LoadingGif.gif; path = ../../../LoadingGif.gif; sourceTree = "<group>"; };
 		AC35D9E32945E1260029F82C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		AC35D9E7294614B20029F82C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AC8C6C992951C362000B94F4 /* UIImage extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage extension.swift"; sourceTree = "<group>"; };
@@ -75,6 +71,10 @@
 		ACB40430292E4B51006E3430 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		ACC37225292649490036B9A7 /* AudioGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = AudioGif.gif; sourceTree = "<group>"; };
 		ACC3722729264BBF0036B9A7 /* ManageGifs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageGifs.swift; sourceTree = "<group>"; };
+		ACEDD6B2299D035A007496D7 /* SpeakerGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = SpeakerGif.gif; path = ../../../RadioImages/SpeakerGif.gif; sourceTree = "<group>"; };
+		ACEDD6B4299D0369007496D7 /* LoadingScreenGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LoadingScreenGif.gif; path = ../../../RadioImages/LoadingScreenGif.gif; sourceTree = "<group>"; };
+		ACEDD6B6299D0373007496D7 /* LoadingGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LoadingGif.gif; path = ../../../RadioImages/LoadingGif.gif; sourceTree = "<group>"; };
+		ACEDD6B8299D03A0007496D7 /* stubJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = stubJson.json; path = ../../OHHTTPStubs_Test/stubJson.json; sourceTree = "<group>"; };
 		C718A113BD5F9C8CF04900B4 /* Pods-RadioTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadioTest.release.xcconfig"; path = "Target Support Files/Pods-RadioTest/Pods-RadioTest.release.xcconfig"; sourceTree = "<group>"; };
 		FE0590BCDB241170EF720AAA /* Pods-RadioTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadioTest.debug.xcconfig"; path = "Target Support Files/Pods-RadioTest/Pods-RadioTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +122,7 @@
 		AC93C4302964415000061416 /* RadioTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				AC2C441B2972E62B002A5D71 /* stubJson.json */,
+				ACEDD6B8299D03A0007496D7 /* stubJson.json */,
 				AC93C4312964415000061416 /* RadioTestTests.swift */,
 			);
 			path = RadioTestTests;
@@ -185,9 +185,9 @@
 			isa = PBXGroup;
 			children = (
 				ACC3722729264BBF0036B9A7 /* ManageGifs.swift */,
-				AC2C441D2972E649002A5D71 /* SpeakerGif.gif */,
-				AC2C441F2972E65E002A5D71 /* LoadingScreenGif.gif */,
-				AC2C44212972E666002A5D71 /* LoadingGif.gif */,
+				ACEDD6B2299D035A007496D7 /* SpeakerGif.gif */,
+				ACEDD6B4299D0369007496D7 /* LoadingScreenGif.gif */,
+				ACEDD6B6299D0373007496D7 /* LoadingGif.gif */,
 				ACC37225292649490036B9A7 /* AudioGif.gif */,
 			);
 			path = Gifs;
@@ -282,7 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC2C441C2972E62B002A5D71 /* stubJson.json in Resources */,
+				ACEDD6B9299D03A0007496D7 /* stubJson.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,10 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACB272FE290EEF150035E418 /* LaunchScreen.storyboard in Resources */,
-				AC2C44202972E65E002A5D71 /* LoadingScreenGif.gif in Resources */,
 				ACB272FB290EEF150035E418 /* Assets.xcassets in Resources */,
-				AC2C441E2972E649002A5D71 /* SpeakerGif.gif in Resources */,
-				AC2C44222972E666002A5D71 /* LoadingGif.gif in Resources */,
+				ACEDD6B5299D0369007496D7 /* LoadingScreenGif.gif in Resources */,
+				ACEDD6B7299D0374007496D7 /* LoadingGif.gif in Resources */,
+				ACEDD6B3299D035B007496D7 /* SpeakerGif.gif in Resources */,
 				ACC37226292649490036B9A7 /* AudioGif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

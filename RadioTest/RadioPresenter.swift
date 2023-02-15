@@ -19,6 +19,9 @@ protocol RadioPresenterDelegate {
     func showStatusValuesInScreen(playerItem: AVPlayerItem, player: AVPlayer)
     func setReproductionFailed()
     func sendAlerts(message: String, buttonTitle: String)
+    //Testing Failures
+    func startAlertsTest()
+    func startSecondAlerts(station: RadioModel)
 }
 
 class RadioPresenter {
@@ -76,12 +79,23 @@ class RadioPresenter {
         coordinator!.goToMenuVC()
     }
     
+//    func touchCellPlayButton(station : RadioModel) {
+//        delegate!.reproductorLoading()
+//        delegate?.restartPlayer()
+//        myStation = station
+//        startReproduction()
+//    }
+    
+    //añadir alertas para probar
+    
+//    func touchCellPlayButton(station : RadioModel) {
+//        delegate!.reproductorLoading()
+//        delegate?.restartPlayer()
+//        myStation = station
+//        startReproduction()
+//    }
     func touchCellPlayButton(station : RadioModel) {
-        delegate!.reproductorLoading()
-        delegate?.restartPlayer()
-        myStation = station
-        startReproduction()
-        
+        delegate?.startSecondAlerts(station: station)
     }
     func observeValue(keyPath: String) {
         switch keyPath {
@@ -148,19 +162,41 @@ class RadioPresenter {
             return "Default"
         }
     }
+//    func startReproduction() {
+//        let url = URL(string: (myStation?.url)!)
+//        myPlayerItem = AVPlayerItem(url: url!)
+//        myPlayer = AVPlayer(playerItem: myPlayerItem)
+//        let audioSession = AVAudioSession.sharedInstance()
+//        do {
+//             try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+//        } catch {
+//            print("Fallo Audio Session")
+//        }
+//        delegate?.createObserver()
+//        myPlayer.play()
+//    }
     func startReproduction() {
-        let url = URL(string: (myStation?.url)!)
-        myPlayerItem = AVPlayerItem(url: url!)
-        myPlayer = AVPlayer(playerItem: myPlayerItem)
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-             try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
-        } catch {
-            print("Fallo Audio Session")
-        }
-        delegate?.createObserver()
-        myPlayer.play()
+        delegate?.startAlertsTest()
+//        let url = URL(string: (myStation?.url)!)
+//        myPlayerItem = AVPlayerItem(url: url!)
+//        myPlayer = AVPlayer(playerItem: myPlayerItem)
+//        let audioSession = AVAudioSession.sharedInstance()
+//        do {
+//             try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+//        } catch {
+//            print("Fallo Audio Session")
+//        }
+//        delegate?.createObserver()
+//        myPlayer.play()
     }
+//    func alertStart(message: String, buttonTitle: String)
+//    func alertPlayerItem(message: String, buttonTitle: String)
+//    func alertAVPlayer(message: String, buttonTitle: String)
+//    func alertAudioSession(message: String, buttonTitle: String)
+//    func alertDoTryCatch(message: String, buttonTitle: String)
+//    func alertCreateObserver(message: String, buttonTitle: String)
+//    func alertPlay(message: String, buttonTitle: String)
+    
     func manageFavourites(cell : RadioTableViewCell) {
         cell.favouriteSelected?.toggle()
         if cell.favouriteSelected == true {

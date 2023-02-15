@@ -20,6 +20,9 @@ class RadioTableViewCell : UITableViewCell {
     var station : RadioModel?
     let tint : UIColor = .white
     
+    //VC test
+    var radioVCTest : RadioViewController?
+    
     lazy var favouriteButton : UIButton = {
         let favouriteButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 50, y: 5, width: 35, height: 35))
         favouriteButton.setImage(UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 15))), for: .normal)
@@ -58,9 +61,17 @@ class RadioTableViewCell : UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+//    @objc func touchPlayButton() {
+//        delegate?.touchPlayButton(cell: self)
+//    }
     @objc func touchPlayButton() {
-        delegate?.touchPlayButton(cell: self)
+        let alert = UIAlertController(title: "Alerta", message: "Tap Button", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: {_ in
+            self.delegate?.touchPlayButton(cell: self)
+        }))
+        radioVCTest!.present(alert, animated: true, completion: nil)
     }
+    
     @objc func tapFavouriteButton() {
         delegate?.tapFavouriteButton(cell: self)
     }
