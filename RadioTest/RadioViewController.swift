@@ -205,7 +205,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         var myCurrentImage = UIImage()
         cell.id = myStation.id
         cell.station = myStation
-        if radioPresenter.favoritesIdList.contains(cell.id!){
+        if radioPresenter.favoritesIdList.contains(cell.id){
             cell.favouriteSelected = true
             cell.favouriteButton.isSelected = true
             cell.favouriteButton.tintColor = tintSelectColor
@@ -215,19 +215,22 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
             cell.favouriteButton.tintColor = tintNormalColor
         }
         cell.configureOnlyLabel(radio: myStation)
-        RadioApi.downloadImages(url: URL(string: myStation.urlImage)!) {
-            resultImage in
-            switch resultImage{
-            case .success(let image):
-                DispatchQueue.main.async {
-                    cell.stationImage.image = image
-                    myCurrentImage = image
+        if let url = URL(string: myStation.urlImage)  {
+            RadioApi.downloadImages(url: url) {
+                resultImage in
+                switch resultImage{
+                case .success(let image):
+                    DispatchQueue.main.async {
+                        cell.stationImage.image = image
+                        myCurrentImage = image
+                    }
+                case .failure(_):
+                    print("Error en la descarga")
                 }
-            case .failure(_):
-                print("Error en la descarga")
             }
+
         }
-        if radioPresenter.cellIdSelected == cell.id && playingFailed == false {
+                if radioPresenter.cellIdSelected == cell.id && playingFailed == false {
             myStationSoundingImage = myCurrentImage
             //cell.stationLabel.frame = CGRect(x: 65, y: 7.5, width: UIScreen.main.bounds.width - 170, height: 30)
             print(myCurrentImage)

@@ -164,10 +164,10 @@ class RadioPresenter {
     func manageFavourites(cell : RadioTableViewCell) {
         cell.favouriteSelected?.toggle()
         if cell.favouriteSelected == true {
-            favoritesIdList.append(cell.id!)
+            favoritesIdList.append(cell.id)
             cell.favouriteButton.isSelected = true
         } else {
-            let index = favoritesIdList.firstIndex(of: cell.id!)
+            let index = favoritesIdList.firstIndex(of: cell.id)
             favoritesIdList.remove(at: index!)
             cell.favouriteButton.isSelected = false
         }

@@ -15,7 +15,7 @@ protocol RadioTableViewDelegate {
 
 class RadioTableViewCell : UITableViewCell {
     var delegate : RadioTableViewDelegate?
-    var id : Int?
+    var id : Int = 0
     var favouriteSelected : Bool?
     var station : RadioModel?
     let tint : UIColor = .white
