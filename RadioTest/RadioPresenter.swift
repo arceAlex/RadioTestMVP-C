@@ -35,6 +35,10 @@ class RadioPresenter {
     var coordinator : AppCoordinator?
     var jsonError : JsonError?
     
+    required init(coordinator : AppCoordinator) {
+        
+    }
+    
     func getStations() {
         RadioApi.fetchRadioJson { result in
             switch result {
